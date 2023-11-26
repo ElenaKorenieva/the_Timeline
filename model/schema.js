@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const moment = require("moment");
+const Joi = require("joi");
 const schema = mongoose.Schema;
 
 function generateRandomNumber() {
@@ -11,7 +12,6 @@ const postSchema = new schema(
     name: {
       type: String,
     },
-
     post: {
       type: String,
       required: true,
@@ -31,4 +31,19 @@ const postSchema = new schema(
   { versionKey: false, timestamps: true }
 );
 
-module.exports = mongoose.model("postsSchema", postSchema);
+const joiSchema = Joi.object({
+  post: Joi.string().min(25).required().messages({
+    "any.required": "The post length must be at least 25 characters long",
+  }),
+});
+
+const schemas = {
+  joiSchema,
+};
+
+const Post = mongoose.model("postsSchema", postSchema);
+
+module.exports = {
+  Post,
+  schemas,
+};
