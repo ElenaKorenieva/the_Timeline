@@ -6,8 +6,11 @@ dotenv.config();
 
 const app = express();
 
-app.use(route);
 const port = process.env.PORT;
-app.listen(port, console.log(`app is on ${port}`));
 
-app.get("/", (req, res) => {});
+app.set("view engine", "ejs");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(route);
+
+app.listen(port, console.log(`app is on ${port}`));
