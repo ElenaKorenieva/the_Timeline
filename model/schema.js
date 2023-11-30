@@ -27,6 +27,12 @@ const postSchema = new schema(
         return moment(createdAt).format("MMMM Do YYYY, h:mm:ss a");
       },
     },
+    comments: [
+      {
+        type: schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );
@@ -41,7 +47,7 @@ const schemas = {
   joiSchema,
 };
 
-const Post = mongoose.model("postsSchema", postSchema);
+const Post = mongoose.model("Post", postSchema);
 
 module.exports = {
   Post,
