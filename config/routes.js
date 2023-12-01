@@ -6,7 +6,7 @@ const commentController = require("../controllers/commentController");
 route.get("/", funController.getMainPage);
 route.post("/", funController.createPost);
 route.post("/posts/:postId/create-comment", commentController.createComment);
-route.delete("/:id", funController.deletePost);
+route.delete("/posts/:postId", funController.deletePost);
 route.get("/posts/:postId/update-post", funController.getUpdatedPage);
 route.post("/post/:postId/edit-post", funController.editPost);
 

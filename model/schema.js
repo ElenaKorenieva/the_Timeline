@@ -15,6 +15,7 @@ const postSchema = new schema(
     post: {
       type: String,
       required: true,
+      minLength: 25,
     },
     randomUser: {
       type: Number,

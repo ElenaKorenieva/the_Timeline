@@ -32,7 +32,8 @@ const createPost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
-  await Post.findByIdAndDelete(req.params.id);
+  const { postId } = req.params;
+  await Post.findByIdAndDelete(postId);
   res.redirect("/");
 };
 

@@ -24,7 +24,7 @@
       <h1 class="text-light ms-4 py-1 fs-2">The Timeline</h1>
     </nav>
  
-    <section class="container-fluid px-5">
+    <div class="container-fluid px-5">
       <form action="/" method="POST">
         <label
           for="postMessage"
@@ -72,7 +72,7 @@
                     <form action="/posts/<%= post.id %>/update-post" class="d-inline">
                       <button type="submit" class="btn btn-info" style="color: white">Edit</button>
                     </form>
-                    <form action="/<%= post.id %>?_method=DELETE" method="POST" class="d-inline">
+                    <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" class="d-inline">
                       <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                   </div>
