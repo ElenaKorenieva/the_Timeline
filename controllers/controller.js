@@ -1,4 +1,4 @@
-const { Post } = require("../model/schema");
+const Post = require("../model/schema");
 const Comment = require("../model/commentSchema");
 
 const getMainPage = async (req, res) => {
@@ -6,9 +6,8 @@ const getMainPage = async (req, res) => {
     const posts = await Post.find({})
       .populate("comments", "comment")
       .sort({ createdAt: -1 });
-    res.render("index", { posts });
-  } catch (error) {
-    console.error(error);
+    res.render("index", { posts, err: "" });
+  } catch (err) {
     res.status(500).send("Internal Server Error");
   }
 };
@@ -23,30 +22,42 @@ const createPost = async (req, res) => {
       const posts = await Post.find({}).sort({ createdAt: -1 });
       res.render("index", {
         posts,
-        err: "Should be longer that 25 characters",
+        err: "Should be longer than 25 characters",
       });
     }
   } catch (err) {
-    console.error(err);
+    res.status(500).send("Internal Server Error");
   }
 };
 
 const deletePost = async (req, res) => {
-  const { postId } = req.params;
-  await Post.findByIdAndDelete(postId);
-  res.redirect("/");
+  try {
+    const { postId } = req.params;
+    await Post.findByIdAndDelete(postId);
+    res.redirect("/");
+  } catch (err) {
+    res.status(404).send("Not found");
+  }
 };
 
 const getUpdatedPage = async (req, res) => {
-  const { postId } = req.params;
-  const post = await Post.findById(postId);
-  res.render("updatePage", { post });
+  try {
+    const { postId } = req.params;
+    const post = await Post.findById(postId);
+    res.render("updatePage", { post });
+  } catch (err) {
+    res.status(404).send("Not found");
+  }
 };
 
 const editPost = async (req, res) => {
-  const { postId } = req.params;
-  await Post.findByIdAndUpdate(postId, req.body);
-  res.redirect("/");
+  try {
+    const { postId } = req.params;
+    const post = await Post.findByIdAndUpdate(postId, req.body);
+    res.redirect("/");
+  } catch (err) {
+    res.status(404).send("Not found");
+  }
 };
 
 module.exports = {

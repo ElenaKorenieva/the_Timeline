@@ -35,10 +35,11 @@
           name="post"
           id="postMessage"
           class="form-control border-info"
-          minlength="25"
           style="height: 100px"
-          required
         ></textarea>
+        <% if(err){ %>
+          <p class="text-danger"><%= err %></p>
+          <% } %>
         <div class="d-flex flex-column align-items-end">
           <button type="submit" class="btn btn-info mt-4" style="color: white">
             <i class="fa-solid fa-pen pe-2 text-white"></i>Post a message
@@ -63,7 +64,7 @@
                       <p class="mt-2"><%= comment.comment %></p>
                     <% }) %>
                     <form action="/posts/<%= post._id%>/create-comment" method="post" class="mt-4">
-                      <input type="text" id="comment" name="comment">
+                      <input type="text" id="comment" name="comment" minlength="25" required>
                       <button type="submit">Comment</button>
                     </form>
                     
