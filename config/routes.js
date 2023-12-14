@@ -4,11 +4,24 @@ const funController = require("../controllers/controller");
 const commentController = require("../controllers/commentController");
 const postControllerAPI = require("../controllersAPI/posts");
 const commentControllerAPI = require("../controllersAPI/comments");
+const userController = require("../controllers/userController");
+const auth = require("../middleware/auth");
 
 // Browser Routes:
-route.get("/", funController.getMainPage);
-route.post("/", funController.createPost);
-route.post("/posts/:postId/create-comment", commentController.createComment);
+route.get("/", auth.checkUserLogIn, userController.renderSigninPage);
+route.post("/signup", auth.isAuth, userController.signupUser);
+route.post("/login", auth.isAuth, userController.loginUser);
+route.get("/logout", userController.logOut);
+
+route.get("/home", auth.isLoggedInUser, funController.getMainPage);
+
+route.post("/posts/:userId", funController.createPost);
+route.get("/all-posts", auth.isLoggedInUser, funController.getPosts);
+route.post(
+  "/posts/:postId/create-comment",
+  auth.isLoggedInUser,
+  commentController.createComment
+);
 route.delete("/posts/:postId", funController.deletePost);
 route.get("/posts/:postId/update-post", funController.getUpdatedPage);
 route.post("/post/:postId/edit-post", funController.editPost);

@@ -9,7 +9,7 @@ const createComment = async (req, res) => {
     const thePost = await Post.findById(postId);
     thePost.comments.push(newComment);
     await thePost.save();
-    res.redirect("/");
+    res.redirect("/all-posts");
   } catch (err) {
     res.status(500).send("Internal Server Error");
   }

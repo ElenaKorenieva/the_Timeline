@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container d-flex flex-row justify-content-evenly gap-3">
+      <div class="mt-5 p-3 card">
+        <h2 class="mb-3">Sign up</h2>
+        <form action="/signup" method="POST" class="d-flex flex-column">
+          <label for="userName">Username</label>
+          <input type="text" name="userName" id="userName" class="rounded" />
+          <br />
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" class="rounded" />
+          <br />
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="rounded"
+          />
+          <br />
+          <% if (error && error.signupUserName) { %>
+          <h3 class="fs-6 text-danger"><%= error.signupUserName %></h3>
+          <% } %> <% if (error && error.signupEmail) { %>
+          <h3 class="fs-6 text-danger"><%= error.signupEmail %></h3>
+          <% } %> <% if (error && error.signupPassword) {%>
+          <h3 class="fs-6 text-danger"><%= error.signupPassword %></h3>
+          <% } %> <% if (success) { %>
+          <h3 class="fs-6 text-success"><%= success %></h3>
+          <% } %>
+          <input
+            type="submit"
+            value="Sign up"
+            class="btn btn-info"
+            style="color: white"
+            class="rounded"
+          />
+        </form>
+      </div>
+      <div class="mt-5 p-3 card">
+        <h2 class="mb-3">Log in</h2>
+        <form action="/login" method="POST" class="d-flex flex-column">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" class="rounded" />
+          <br />
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="rounded"
+          />
+          <br />
+          <input
+            type="submit"
+            value="Log In"
+            class="btn btn-info"
+            style="color: white"
+            class="rounded"
+          />
+          <% if (error && error.loginErr) {%>
+          <h3 class="mt-2 fs-6 text-danger"><%= error.loginErr %></h3>
+          <% } %>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

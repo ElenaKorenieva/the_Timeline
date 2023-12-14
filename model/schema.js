@@ -2,23 +2,16 @@ const mongoose = require("mongoose");
 const moment = require("moment");
 const schema = mongoose.Schema;
 
-function generateRandomNumber() {
-  return Math.floor(Math.random() * 1000);
-}
-
 const postSchema = new schema(
   {
-    name: {
-      type: String,
+    owner: {
+      type: schema.Types.ObjectId,
+      ref: "user",
     },
     post: {
       type: String,
       required: true,
       minLength: 25,
-    },
-    randomUser: {
-      type: Number,
-      default: generateRandomNumber,
     },
     getDate: {
       type: Date,
