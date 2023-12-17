@@ -4,7 +4,9 @@ const dotenv = require("dotenv").config();
 const isAuth = (req, res, next) => {
   if (req.body.email === "") {
     res.render("signin", {
-      error: "Email can not be empty",
+      error: {
+        signupEmail: "Email can not be empty"
+      },
       success: "",
     });
   } else {
