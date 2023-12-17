@@ -90,7 +90,7 @@ module.exports = {
   getMainPage,
   getPosts,
   createPost,
-  backToHomePage,
+  // backToHomePage,
   deletePost,
   getUpdatedPage,
   editPost,
